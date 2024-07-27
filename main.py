@@ -61,7 +61,10 @@ def exec_single_product(url: str):
             break
 
     # find descripttion
-    description = soup.find("div", class_="item_text").text.strip()
+    description = ""
+    description_list = soup.find_all("div", class_="item_text")
+    if len(description_list) != 0:
+        description = description_list[0].text.strip()
 
     return {"category": category, "description": description}
 
