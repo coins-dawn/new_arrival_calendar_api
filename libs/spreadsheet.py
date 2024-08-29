@@ -42,13 +42,13 @@ class SpreadSheetAccessor:
         if row_count > 1:
             self.worksheet.delete_rows(2, row_count)
     
-    def append_product_detail(self, product_detail: ProductDetail):
+    def append_product_detail(self, product_detail: ProductDetail, image_url: str):
         """シートの末尾にレコードを追加する。"""
         product = product_detail.product
         row = [
             product.id, product.name, product_detail.category, 
             product_detail.description, product.price, product.tax_price,
-            product.arrival, product.url, product_detail.image_url
+            product.arrival, product.url, image_url
         ]
         self.worksheet.append_row(row)
 

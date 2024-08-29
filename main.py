@@ -2,6 +2,7 @@ import time
 import pprint
 from libs.scraping import exec_single_week, exec_single_product
 from libs.spreadsheet import SpreadSheetAccessor
+from libs.image import ImageUploader
 
 
 ACCESS_SPAN_SEC = 10  # 秒
@@ -19,6 +20,7 @@ def fetch_product_list():
 
 def main():
     ssaccessor = SpreadSheetAccessor()
+    image_uploader = ImageUploader()
     sheet_matrix = ssaccessor.fetch_all_records()
     product_id_set = {row[0] for row in sheet_matrix}
     
@@ -28,7 +30,9 @@ def main():
         if product.id in product_id_set:
             continue
         product_detail = exec_single_product(product)
-        ssaccessor.append_product_detail(product_detail)
+        file_id = image_uploader.download_and_upload_image(product_detail.image_url)
+        image_url = "https://lh3.googleusercontent.com/d/" + file_id
+        ssaccessor.append_product_detail(product_detail, image_url)
         time.sleep(ACCESS_SPAN_SEC)
 
 

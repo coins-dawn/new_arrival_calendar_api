@@ -1,6 +1,9 @@
 requests
 beautifulsoup4
-pillow
+Pillow
 gspread
 oauth2client
 python-dotenv
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
