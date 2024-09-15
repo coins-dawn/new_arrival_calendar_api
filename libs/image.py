@@ -59,10 +59,3 @@ class ImageHandler:
     def remove_image(self, file_id: str) -> None:
         """画像を削除する。"""
         self.service.files().delete(fileId=file_id).execute()
-        print(f"delete file: {file_id}")
-
-
-if __name__ == "__main__":
-    image_handler = ImageHandler()
-    file_id = "1q0Jw84ntTutaXU5U8FySficf7lsSKhIa"
-    image_handler.remove_image(file_id)
